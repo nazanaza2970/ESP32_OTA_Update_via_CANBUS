@@ -90,10 +90,26 @@ pip install python-can
 
 ### Execution
 
-Compile your ESP32 binary (`.bin`) via PlatformIO or Arduino IDE, then execute the flash script with the exact target Node ID defined in your ESP32 code.
+Compile your ESP32 binary (`filename.ino.bin`) via PlatformIO or Arduino IDE, then execute the flash script with the exact target Node ID defined in your ESP32 code.
 
 ```bash
 python3 host/ota_flash.py build/firmware.bin --can-id 0x267
 
 ```
-can-id is your esp32's id on the CAN network. Depends on your configuration.
+
+### Arduino IDE Settings (Target Board)
+During implementation, the target board was configured with the following exact settings in the Arduino IDE:
+
+Board: Arduino Nano ESP32
+Core Debug Level: None
+Pin Numbering: By Arduino pin (default)
+USB Mode: Hardware CDC and JTAG
+Programmer: esptool
+Partition Scheme: You must allocate dual application partitions so the ESP32 has a place to write the incoming binary. Select "Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)" or "Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)".
+
+
+### Misc
+- 'can-id' is your esp32's id on the CAN network. Depends on your configuration.
+- The file to upload is sketch_name.ino.bin file. You get this file (and a bunch of other build of similar names, it's important that you choose .ino.bin one) by doing 'export compiled binary' in the arduino IDE
+- You need to do an initial upload to the esp32 via usb before you can start uploading via CANBUS.
+- If you see "No DFU Capable Device Available" when uploading via USB, you can short B1 and GND, press reset button, disconnect B1 (light color will change), then select uploader -> esptool and upload via programmer
