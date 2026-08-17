@@ -112,4 +112,4 @@ Partition Scheme: You must allocate dual application partitions so the ESP32 has
 - 'can-id' is your esp32's id on the CAN network. Depends on your configuration.
 - The file to upload is sketch_name.ino.bin file. You get this file (and a bunch of other build of similar names, it's important that you choose .ino.bin one) by doing 'export compiled binary' in the arduino IDE
 - You need to do an initial upload to the esp32 via usb before you can start uploading via CANBUS.
-- If you see "No DFU Capable Device Available" when uploading via USB, you can short B1 and GND, press reset button, disconnect B1 (light color will change), then select uploader -> esptool and upload via programmer
+- If you see "No DFU Capable Device Available" when uploading via USB, you can short B1 and GND, press reset button, disconnect B1 (light color will change), then select programmer -> esptool and upload via programmer
